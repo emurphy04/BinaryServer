@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class TreeController {
 
     @Autowired
@@ -16,11 +17,13 @@ public class TreeController {
     @PostMapping(value = "/process-numbers", produces = "application/json")
     public String processNumbers(@RequestBody List<Integer> numbers) {
         BinaryTree tree = treeService.createBinaryTree(numbers);
-        return tree.toSerializedString(); // Return the serialized tree as JSON
+        return tree.toSerializedString();
     }
 
-    @GetMapping("/previous-trees")
+    @GetMapping(value = "/previous-trees", produces = "application/json")
     public List<TreeRecord> getPreviousTrees() {
         return treeService.getAllTrees();
     }
 }
+
+
